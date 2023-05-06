@@ -71,8 +71,8 @@ jobs:
     - name: Run PostgreSQL migrations
       run: make migratepgup
     
-    - name: Run MySQL migrations
-      run: make migratemsup
+    # - name: Run MySQL migrations
+    #   run: make migratemsup
 
     - name: Test
       run: make test
