@@ -55,7 +55,7 @@ jobs:
       redis:
         image: redis:7.0.11
         options: >-
-          --health-cmd "mysqladmin ping"
+          --health-cmd "redis ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -63,6 +63,19 @@ jobs:
           - "6379:6379"
 
     steps:
+    - name: Enable Redis memory overcommit
+      run: |
+        sudo sysctl vm.overcommit_memory=1
+        echo "vm.overcommit_memory = 1" | sudo tee -a /etc/sysctl.conf
+
+    - name: Test Redis
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y redis-tools
+        redis-cli -h redis -p 6379 -a secret PING
+        redis-cli -h redis -p 6379 -a secret FLUSHALL
+        redis-cli -h redis -p 6379 -a secret QUIT
+        
     - name: Set up Go
       uses: actions/setup-go@v3
       with:
