@@ -1,5 +1,5 @@
 PG_DB_URL=postgresql://root:secret@localhost:5432/social_media?sslmode=disable
-MS_DB_URL=mysql://root:secret@localhost:3306/social_media
+MS_DB_URL=mysql://root:secret@localhost:3306/social_media?sslmode=disable
 
 postgres:
 		docker run --name postgres12 -p 5432:5432 -e POSTGRES_USER=root -e POSTGRES_PASSWORD=secret -d postgres:12-alpine
