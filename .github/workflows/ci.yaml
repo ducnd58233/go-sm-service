@@ -38,11 +38,13 @@ jobs:
         image: mysql:8.0
         # Provide the password for mysql
         env:
+          MYSQL_USER: duc
+          MYSQL_PASSWORD: secret
           MYSQL_ROOT_PASSWORD: secret
           MYSQL_DATABASE: social_media
         # Set health checks to wait until mysql has started
         options: >-
-          --health-cmd ms_isready
+          --health-cmd "mysqladmin ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
