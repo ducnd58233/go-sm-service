@@ -35,7 +35,7 @@ jobs:
       
       mysql:
         # Docker Hub image
-        image: mysql:8
+        image: mysql:8.0
         # Provide the password for mysql
         env:
           MYSQL_ROOT_PASSWORD: secret
